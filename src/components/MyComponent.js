@@ -14,18 +14,22 @@ class MyComponent extends React.Component {
   handleClick(event) {
     console.log(">> clicked");
     console.log(event);
-
-    //merge State => react Class
-    // unuse var in state unchange
     this.setState({
       name: "Huynh Thai Hoc",
       age: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
     });
   }
-  // Using arrow function when call normal function
-  handleOnMouseOver(event) {
-    // console.log(this.state.name);
-  }
+
+  handleOnChangeInput = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleOnSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+  };
 
   //JSX - viet code js trong html
   render() {
@@ -34,20 +38,15 @@ class MyComponent extends React.Component {
         My name is {this.state.name} and I come from {this.state.address},{" "}
         {this.state.age} years old.
         <div>
-          <button
-            onClick={(event) => {
-              this.handleClick(event);
-            }}
-          >
-            Click me!
-          </button>
-          <button
-            onMouseOver={(event) => {
-              this.handleOnMouseOver(event);
-            }}
-          >
-            Hover me!
-          </button>
+          <form onSubmit={(event) => this.handleOnSubmit(event)}>
+            <input
+              type="text"
+              onChange={(event) => {
+                this.handleOnChangeInput(event);
+              }}
+            />
+            <button>Submit</button>
+          </form>
         </div>
       </div>
     );
