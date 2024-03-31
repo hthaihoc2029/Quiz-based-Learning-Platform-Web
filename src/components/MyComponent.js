@@ -7,6 +7,14 @@ import DisplayInfo from "./DisplayInfo";
 
 // inherit React.Component
 class MyComponent extends React.Component {
+  state = {
+    listUsers: [
+      { id: 1, name: "HTH", age: 10 },
+      { id: 2, name: "TBL", age: 20 },
+      { id: 3, name: "LQA", age: 30 },
+    ],
+  };
+
   //JSX - viet code js trong html
   render() {
     return (
@@ -14,7 +22,7 @@ class MyComponent extends React.Component {
         <UserInfo />
         <br />
         <br />
-        <DisplayInfo name="HTHds" age="30" />
+        <DisplayInfo listUsers={this.state.listUsers} />
       </div>
     );
   }
