@@ -2,8 +2,8 @@
 // class component vs function component
 
 import React from "react";
-import UserInfo from "./UserInfo";
 import DisplayInfo from "./DisplayInfo";
+import AddUserInfo from "./AddUserInfo";
 
 // inherit React.Component
 class MyComponent extends React.Component {
@@ -15,11 +15,19 @@ class MyComponent extends React.Component {
     ],
   };
 
+  handleAddNewUser = (userObj) => {
+    this.setState({
+      listUsers: [...this.state.listUsers, userObj],
+    });
+
+    // console.log(userObj);
+  };
+
   //JSX - viet code js trong html
   render() {
     return (
       <div>
-        <UserInfo />
+        <AddUserInfo handleAddNewUser={this.handleAddNewUser} />
         <br />
         <br />
         <DisplayInfo listUsers={this.state.listUsers} />
