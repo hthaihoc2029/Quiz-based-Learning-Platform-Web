@@ -19,8 +19,6 @@ class MyComponent extends React.Component {
     this.setState({
       listUsers: [...this.state.listUsers, userObj],
     });
-
-    // console.log(userObj);
   };
 
   //JSX - viet code js trong html
