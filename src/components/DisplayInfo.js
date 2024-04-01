@@ -1,6 +1,16 @@
 import React from "react";
 
 class DisplayInfo extends React.Component {
+  state = {
+    isShowListUser: true,
+  };
+
+  handleShowHide = (event) => {
+    this.setState({
+      isShowListUser: !this.state.isShowListUser,
+    });
+  };
+
   render() {
     // destructuring array/obj
     const { listUsers } = this.props;
@@ -8,18 +18,31 @@ class DisplayInfo extends React.Component {
     return (
       //props => properties
       <div>
-        {listUsers.map((user) => {
-          return (
-            <div key={user.id}>
-              <div>My name is {user.name}</div>
-              <div>My age is {user.age}</div>
-              <hr />
-            </div>
-          );
-        })}
+        <div>
+          <span
+            onClick={(event) => {
+              this.handleShowHide(event);
+            }}
+          >
+            {this.state.isShowListUser === true
+              ? "Hide list users:"
+              : "Show list users:"}
+          </span>
+        </div>
 
-        {/* <div>My name is {name}</div>
-        <div>My age is {age}</div> */}
+        {this.state.isShowListUser && (
+          <div>
+            {listUsers.map((user) => {
+              return (
+                <div className={+user.age > 18 ? "red" : "green"} key={user.id}>
+                  <div>My name is {user.name}</div>
+                  <div>My age is {user.age}</div>
+                  <hr />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
   }
