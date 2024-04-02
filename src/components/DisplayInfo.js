@@ -34,11 +34,18 @@ class DisplayInfo extends React.Component {
 
         {this.state.isShowListUser && (
           <>
-            {listUsers.map((user) => {
+            {listUsers.map((user, index) => {
               return (
                 <div className={+user.age > 18 ? "red" : "green"} key={user.id}>
                   <div>My name is {user.name}</div>
                   <div>My age is {user.age}</div>
+                  <div>
+                    <button
+                      onClick={() => this.props.handleDeleteUser(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                   <hr />
                 </div>
               );
