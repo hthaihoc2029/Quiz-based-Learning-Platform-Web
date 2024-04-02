@@ -2,9 +2,28 @@ import React from "react";
 import "./DisplayInfo.scss";
 import logo from "../logo.svg";
 class DisplayInfo extends React.Component {
-  state = {
-    isShowListUser: true,
-  };
+  constructor(props) {
+    console.log(">> call constructor");
+    super(props);
+    //babel compiler
+    this.state = {
+      isShowListUser: true,
+    };
+  }
+
+  componentDidMount() {
+    console.log(">> call componentDidMount");
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(">> call componentDidUpdate", this.props, prevProps);
+
+    if (this.props.listUsers !== prevProps.listUsers) {
+      if (this.props.listUsers.length === 5) {
+        alert("You have 5 user!");
+      }
+    }
+  }
 
   handleShowHide = (event) => {
     this.setState({
@@ -13,6 +32,7 @@ class DisplayInfo extends React.Component {
   };
 
   render() {
+    console.log("call me Render");
     // destructuring array/obj
     const { listUsers } = this.props;
 
