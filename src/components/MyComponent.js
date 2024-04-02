@@ -15,7 +15,7 @@ const MyComponent = () => {
   const [listUsers, setListUsers] = useState(listUsersDefault);
 
   const handleAddNewUser = (userObj) => {
-    setListUsers([...listUsers, userObj]);
+    setListUsers([userObj, ...listUsers]);
   };
 
   const handleDeleteUser = (userId) => {
