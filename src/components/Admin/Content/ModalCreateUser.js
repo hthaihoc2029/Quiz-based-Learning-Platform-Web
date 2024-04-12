@@ -2,7 +2,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { IoCloudUpload } from "react-icons/io5";
-import axios from "axios";
+import { toast } from "react-toastify";
+import { postCreateUser } from "../../../services/apiService";
 
 const ModalCreateUser = (props) => {
   const { show, setShow } = props;
@@ -15,6 +16,40 @@ const ModalCreateUser = (props) => {
   const [image, setImage] = useState("");
   const [previewImg, setPreviewImg] = useState("");
 
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+  const handleSubmitCreatUser = async () => {
+    //validate data
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      //   alert("invalid email");
+      toast.error("Invalid email");
+      return;
+    }
+
+    if (!password) {
+      toast.error("Invalid password");
+      return;
+    }
+
+    let data = await postCreateUser(email, password, username, role, image);
+
+    console.log("component res:", data);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      handleClose();
+    }
+
+    if (data && data.EC !== 0) {
+      toast.error(data.EM);
+    }
+  };
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -32,39 +67,8 @@ const ModalCreateUser = (props) => {
     }
   };
 
-  const handleSubmitCreatUser = async () => {
-    // validate
-    //call api
-    // let data = {
-    //   email: email,
-    //   password: password,
-    //   username: username,
-    //   role: role,
-    //   userImage: image,
-    // };
-    // console.log(data);
-
-    const form = new FormData();
-    form.append("email", email);
-    form.append("password", password);
-    form.append("username", username);
-    form.append("role", role);
-    form.append("userImage", image);
-
-    let res = await axios.post(
-      "http://localhost:8081/api/v1/participant",
-      form
-    );
-
-    console.log(">>check res:", res);
-  };
-
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-
       <Modal
         className="modal-add-user"
         backdrop="static"
