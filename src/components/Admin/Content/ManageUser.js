@@ -4,10 +4,14 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { getAllUser } from "../../../services/apiService";
 import TableUser from "./TableUser";
+import ModalUpdateUser from "./ModalUpdateUser";
 
 const ManageUser = (props) => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState([]);
   const [listUsers, setListUsers] = useState([]);
+
   const getListUser = async () => {
     let data = await getAllUser();
     if (data.EC === 0) {
@@ -15,7 +19,12 @@ const ManageUser = (props) => {
     }
   };
 
-  //   component DID mount
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    setDataUpdate(user);
+    console.log(user);
+  };
+
   useEffect(() => {
     getListUser();
   }, []);
@@ -35,13 +44,21 @@ const ManageUser = (props) => {
           </div>
           <div className="table-users-container">
             {" "}
-            <TableUser listUsers={listUsers} />
+            <TableUser
+              handleClickBtnUpdate={handleClickBtnUpdate}
+              listUsers={listUsers}
+            />
           </div>
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           getListUser={getListUser}
+        />
+        <ModalUpdateUser
+          setShow={setShowModalUpdateUser}
+          show={showModalUpdateUser}
+          dataUpdate={dataUpdate}
         />
       </div>
     </div>
