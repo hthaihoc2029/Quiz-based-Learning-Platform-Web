@@ -25,6 +25,10 @@ const ManageUser = (props) => {
     console.log(user);
   };
 
+  const resetUpdateDate = () => {
+    setDataUpdate({});
+  };
+
   useEffect(() => {
     getListUser();
   }, []);
@@ -59,6 +63,8 @@ const ManageUser = (props) => {
           setShow={setShowModalUpdateUser}
           show={showModalUpdateUser}
           dataUpdate={dataUpdate}
+          getListUser={getListUser}
+          resetUpdateDate={resetUpdateDate}
         />
       </div>
     </div>
