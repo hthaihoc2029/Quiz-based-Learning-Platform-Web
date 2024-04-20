@@ -2,6 +2,7 @@ import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { useState } from "react";
+import TableUser from "./TableUser";
 
 const ManageUser = (props) => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
@@ -18,7 +19,10 @@ const ManageUser = (props) => {
               <AiFillPlusCircle /> Add new users
             </button>
           </div>
-          <div className="table-users-container"> table user</div>
+          <div className="table-users-container">
+            {" "}
+            <TableUser />
+          </div>
         </div>
         <ModalCreateUser
           show={showModalCreateUser}

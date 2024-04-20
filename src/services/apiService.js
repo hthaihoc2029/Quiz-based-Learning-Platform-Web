@@ -11,4 +11,8 @@ const postCreateUser = (email, password, username, role, image) => {
   return instance.post("api/v1/participant", form);
 };
 
-export { postCreateUser };
+const getAllUser = () => {
+  return instance.get("api/v1/participant/all");
+};
+
+export { postCreateUser, getAllUser };
