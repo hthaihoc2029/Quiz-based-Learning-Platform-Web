@@ -26,7 +26,7 @@ instance.interceptors.response.use(
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
-    console.log("error", error.response);
+    console.log("error", error.response.data);
     // Do something with response error
     return error && error.response && error.response.data
       ? error.response.data
