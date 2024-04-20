@@ -30,7 +30,7 @@ const ModalUpdateUser = (props) => {
     console.log("run useeffect");
   }, [dataUpdate]);
 
-  const handleSubmitCreatUser = async () => {
+  const handleSubmitUpdateUser = async () => {
     let data = await putUpdateUser(dataUpdate.id, username, role, image);
 
     if (data && data.EC === 0) {
@@ -150,7 +150,7 @@ const ModalUpdateUser = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSubmitCreatUser()}>
+          <Button variant="primary" onClick={() => handleSubmitUpdateUser()}>
             Save
           </Button>
         </Modal.Footer>

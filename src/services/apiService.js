@@ -25,4 +25,8 @@ const putUpdateUser = (id, username, role, image) => {
   return instance.put("api/v1/participant", form);
 };
 
-export { postCreateUser, getAllUser, putUpdateUser };
+const delDeleteUser = (userId) => {
+  return instance.delete("api/v1/participant", { data: { id: userId } });
+};
+
+export { delDeleteUser, postCreateUser, getAllUser, putUpdateUser };

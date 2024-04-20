@@ -23,19 +23,23 @@ const TableUser = (props) => {
             listUsers.map((item, index) => {
               return (
                 <tr key={`table-users-${index}`}>
-                  <td>{item.id}</td>
+                  <td>{index + 1}</td>
                   <td>{item.username}</td>
                   <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td>
-                    <button className="btn btn-info">View</button>
                     <button
-                      className="btn btn-warning mx-3"
+                      className="btn btn-warning mx-2"
                       onClick={() => props.handleClickBtnUpdate(item)}
                     >
                       Update
                     </button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      onClick={() => props.handleClickBtnDelete(item)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
