@@ -37,11 +37,10 @@ const ModalCreateUser = (props) => {
 
     let data = await postCreateUser(email, password, username, role, image);
 
-    // console.log("component res:", data);
-
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
+      await props.getListUser();
     }
 
     if (data && data.EC !== 0) {
@@ -57,7 +56,7 @@ const ModalCreateUser = (props) => {
     setImage("");
     setPreviewImg("");
   };
-  const handleShow = () => setShow(true);
+  //   const handleShow = () => setShow(true);
   const handleUploadImage = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setPreviewImg(URL.createObjectURL(event.target.files[0]));

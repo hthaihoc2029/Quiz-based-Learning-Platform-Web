@@ -1,11 +1,25 @@
 import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAllUser } from "../../../services/apiService";
 import TableUser from "./TableUser";
 
 const ManageUser = (props) => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  const [listUsers, setListUsers] = useState([]);
+  const getListUser = async () => {
+    let data = await getAllUser();
+    if (data.EC === 0) {
+      setListUsers(data.DT);
+    }
+  };
+
+  //   component DID mount
+  useEffect(() => {
+    getListUser();
+  }, []);
+
   return (
     <div>
       <div className="manage-user-container">
@@ -21,12 +35,13 @@ const ManageUser = (props) => {
           </div>
           <div className="table-users-container">
             {" "}
-            <TableUser />
+            <TableUser listUsers={listUsers} />
           </div>
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
+          getListUser={getListUser}
         />
       </div>
     </div>
