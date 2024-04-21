@@ -12,7 +12,7 @@ import ModalDeleteUser from "./ModalDeleteUser";
 import TableUserPaginate from "./TableUserPaginate";
 
 const ManageUser = (props) => {
-  const LIMIT_USER = 6;
+  const LIMIT_USER = 3;
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
@@ -20,6 +20,7 @@ const ManageUser = (props) => {
   const [dataDelete, setDataDelete] = useState([]);
   const [listUsers, setListUsers] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getListUser = async () => {
     let data = await getAllUser();
@@ -73,6 +74,8 @@ const ManageUser = (props) => {
               handleClickBtnUpdate={handleClickBtnUpdate}
               handleClickBtnDelete={handleClickBtnDelete}
               listUsers={listUsers}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
               getListUserWithPaginate={getListUserWithPaginate}
               pageCount={pageCount}
             />
@@ -80,21 +83,27 @@ const ManageUser = (props) => {
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
           setShow={setShowModalCreateUser}
-          getListUser={getListUser}
+          getListUserWithPaginate={getListUserWithPaginate}
         />
         <ModalUpdateUser
           setShow={setShowModalUpdateUser}
           show={showModalUpdateUser}
           dataUpdate={dataUpdate}
-          getListUser={getListUser}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          getListUserWithPaginate={getListUserWithPaginate}
           resetUpdateDate={resetUpdateDate}
         />
         <ModalDeleteUser
           setShow={setShowModalDeleteUser}
           show={showModalDeleteUser}
           dataDelete={dataDelete}
-          getListUser={getListUser}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          getListUserWithPaginate={getListUserWithPaginate}
         />
       </div>
     </div>
