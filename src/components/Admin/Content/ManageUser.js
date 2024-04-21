@@ -2,23 +2,37 @@ import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import { getAllUser } from "../../../services/apiService";
+import {
+  getAllUser,
+  getAllUserWithPaginate,
+} from "../../../services/apiService";
 import TableUser from "./TableUser";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalDeleteUser from "./ModalDeleteUser";
+import TableUserPaginate from "./TableUserPaginate";
 
 const ManageUser = (props) => {
+  const LIMIT_USER = 6;
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState([]);
   const [dataDelete, setDataDelete] = useState([]);
   const [listUsers, setListUsers] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
 
   const getListUser = async () => {
     let data = await getAllUser();
     if (data.EC === 0) {
       setListUsers(data.DT);
+    }
+  };
+  const getListUserWithPaginate = async (page) => {
+    let res = await getAllUserWithPaginate(page, LIMIT_USER);
+    if (res.EC === 0) {
+      console.log(res.DT);
+      setListUsers(res.DT.users);
+      setPageCount(res.DT.totalPages);
     }
   };
 
@@ -36,7 +50,8 @@ const ManageUser = (props) => {
   };
 
   useEffect(() => {
-    getListUser();
+    // getListUser();
+    getListUserWithPaginate(1);
   }, []);
 
   return (
@@ -54,10 +69,12 @@ const ManageUser = (props) => {
           </div>
           <div className="table-users-container">
             {" "}
-            <TableUser
+            <TableUserPaginate
               handleClickBtnUpdate={handleClickBtnUpdate}
               handleClickBtnDelete={handleClickBtnDelete}
               listUsers={listUsers}
+              getListUserWithPaginate={getListUserWithPaginate}
+              pageCount={pageCount}
             />
           </div>
         </div>

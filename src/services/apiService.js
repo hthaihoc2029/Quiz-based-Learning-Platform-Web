@@ -14,6 +14,9 @@ const postCreateUser = (email, password, username, role, image) => {
 const getAllUser = () => {
   return instance.get("api/v1/participant/all");
 };
+const getAllUserWithPaginate = (page, limit) => {
+  return instance.get(`api/v1/participant?page=${page}&limit=${limit}`);
+};
 
 const putUpdateUser = (id, username, role, image) => {
   const form = new FormData();
@@ -29,4 +32,10 @@ const delDeleteUser = (userId) => {
   return instance.delete("api/v1/participant", { data: { id: userId } });
 };
 
-export { delDeleteUser, postCreateUser, getAllUser, putUpdateUser };
+export {
+  getAllUserWithPaginate,
+  delDeleteUser,
+  postCreateUser,
+  getAllUser,
+  putUpdateUser,
+};
