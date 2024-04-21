@@ -32,7 +32,14 @@ const delDeleteUser = (userId) => {
   return instance.delete("api/v1/participant", { data: { id: userId } });
 };
 
+// AUTH
+
+const postLogin = (email, password) => {
+  return instance.post("api/v1/login", { email, password });
+};
+
 export {
+  postLogin,
   getAllUserWithPaginate,
   delDeleteUser,
   postCreateUser,
