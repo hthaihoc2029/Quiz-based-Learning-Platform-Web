@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Login.scss";
-import { Button } from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../services/apiService";
 import { toast } from "react-toastify";
@@ -28,7 +27,7 @@ const Login = (props) => {
         <div className="header">
           {" "}
           <span>Don't have an account yet?</span>
-          <button>Sign up</button>
+          <button onClick={() => navigate("/register")}>Sign up</button>
         </div>
         <div className="title col-4 mx-auto">BK Quiz</div>
         <div className="welcome col-4 mx-auto">Hello, who's this?</div>
