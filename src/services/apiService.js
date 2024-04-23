@@ -35,7 +35,7 @@ const delDeleteUser = (userId) => {
 // AUTH
 
 const postLogin = (email, password) => {
-  return instance.post("api/v1/login", { email, password });
+  return instance.post("api/v1/login", { email, password, delay: 3000 });
 };
 const postRegister = (email, password, username) => {
   return instance.post("api/v1/register", { email, username, password });
