@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getDataQuiz } from "../../services/apiService";
 import _ from "lodash";
+import "./DetailQuiz.scss";
 
 const DetailQuiz = (props) => {
+  const location = useLocation();
+  const quizTitle = location?.state?.quizTitle;
+
   const params = useParams();
   const quizId = params.id;
 
@@ -27,10 +31,37 @@ const DetailQuiz = (props) => {
           return { questionId: key, answers, questionDesc, questionImg };
         })
         .value();
+      console.log(data);
     }
   };
 
-  return <div className="detail-quiz-container">DetailQuiz</div>;
+  return (
+    <div className="detail-quiz-container">
+      <div className="left-content">
+        <div className="title">
+          {" "}
+          Quiz {quizId}: {quizTitle}
+        </div>
+        <hr />
+        <div className="q-body">
+          <img />
+        </div>
+        <div className="q-content">
+          <div className="question">Question 1: What your name? </div>
+          <div className="answer">
+            <div className="item-answer">A. 1</div>
+            <div className="item-answer">B. 1</div>
+            <div className="item-answer">C. 1</div>
+          </div>
+        </div>
+        <div className="footer">
+          <button className="btn btn-secondary">Prev</button>
+          <button className="btn btn-primary">Next</button>
+        </div>
+      </div>
+      <div className="right-content">count</div>
+    </div>
+  );
 };
 
 export default DetailQuiz;
