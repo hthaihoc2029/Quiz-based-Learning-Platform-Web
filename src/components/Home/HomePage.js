@@ -15,10 +15,10 @@ const HomePage = (props) => {
       <div className="homepage-content">
         <div className="title-1">There's a better way to ask</div>
         <div className="title-2">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, eius
-          vel tempora nisi sequi incidunt? Vero sunt maxime quas pariatur eaque,
-          voluptate fugiat omnis, corrupti asperiores, praesentium ullam minima
-          nemo.
+          Welcome to BKQuiz! 🌟 Unleash your creativity and challenge your
+          friends, family, or even the world with custom quizzes crafted by you!
+          Whether it's trivia, personality tests, or brain teasers, create and
+          share your quizzes effortlessly. Dive in and let the games begin!
         </div>
         <div className="title-3">
           {isAuthenticated === true ? (
