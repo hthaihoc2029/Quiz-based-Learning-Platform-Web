@@ -1,3 +1,4 @@
+import axios from "axios";
 import instance from "../utils/axiosCustomize";
 
 const postCreateUser = (email, password, username, role, image) => {
@@ -49,7 +50,12 @@ const getDataQuiz = (id) => {
   return instance.get(`api/v1/questions-by-quiz?quizId=${id}`);
 };
 
+const postSubmitQuiz = (data) => {
+  return instance.post("api/v1/quiz-submit", { ...data });
+};
+
 export {
+  postSubmitQuiz,
   getDataQuiz,
   getQuizByUser,
   postRegister,
